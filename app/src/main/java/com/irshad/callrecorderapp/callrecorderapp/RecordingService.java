@@ -56,6 +56,7 @@ public class RecordingService extends Service {
                             rec.reset();
                             rec.release();
                             recoderstarted = false;
+                            rec = null;
                             stopSelf();
                             System.out.println("IRSHAD CALL_STATE_IDLE");
                         } else {
@@ -63,6 +64,7 @@ public class RecordingService extends Service {
                             rec.reset();
                             rec.release();
                             recoderstarted = false;
+                            rec = null;
                             stopSelf();
                             System.out.println("IRSHAD CALL_STATE_IDLE");
                         }
@@ -74,10 +76,20 @@ public class RecordingService extends Service {
                 else if(TelephonyManager.CALL_STATE_OFFHOOK==state){
                     System.out.println("IRSHAD CALL_STATE_OFFHOOK");
                     try {
+                        file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+                        Date date = new Date();
+                        String stringDate = DateFormat.getDateTimeInstance().format(date);
+                        rec = new MediaRecorder();
+                        rec.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
+                        rec.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                        rec.setOutputFile(file.getAbsoluteFile() + "/" + stringDate + "callrec.3gp");
+                        rec.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                        TelephonyManager manager = (TelephonyManager) getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
                     rec.prepare();
                     rec.start();
                     recoderstarted=true;
                     } catch (IOException e) {
+                        System.out.println("irshad Exception ="+ e.getMessage());
                         e.printStackTrace();
                     }
                 }
