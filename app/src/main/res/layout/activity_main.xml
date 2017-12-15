@@ -4,23 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradientcolor"
     tools:context="com.irshad.callrecorderapp.callrecorderapp.MainActivity">
 
     <TextView
+        android:id="@+id/headerText"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="25dp"
         android:text="Call Recorder"
         android:layout_centerHorizontal="true"
      />
 
+    <TextView
+        android:id="@+id/textSubHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        android:text="Switch on Toggle to record your calls"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/headerText"
+        />
+
+
     <ToggleButton
         android:onClick="toggleButtonClick"
         android:id="@+id/toggleButton"
-        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="85dp"
-        android:text="ToggleButton" />
+        android:background="@drawable/toggle_selector"
+        android:layout_marginBottom="150dp"
+        android:text="ToggleButton"
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>

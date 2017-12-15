@@ -24,7 +24,7 @@ public class RecordingService extends Service {
     private MediaRecorder rec;
     private boolean recoderstarted;
     private File file;
-    String path = "sdcard/alrarms/";
+    String path = "sdcard/alarms/";
 
     @Nullable
     @Override
@@ -36,7 +36,7 @@ public class RecordingService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         //return super.onStartCommand(intent, flags, startId);
 
-        file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS);
+        file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
         Date date = new Date();
         String stringDate = DateFormat.getDateTimeInstance().format(date);
         rec = new MediaRecorder();
@@ -49,23 +49,37 @@ public class RecordingService extends Service {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 super.onCallStateChanged(state, incomingNumber);
-                if (TelephonyManager.CALL_STATE_IDLE == state && rec == null){
-                    rec.stop();
-                    rec.reset();
-                    rec.release();
-                    recoderstarted = false;
-                    stopSelf();
+                if (TelephonyManager.CALL_STATE_IDLE == state ){
+                    try {
+                        if (rec == null) {
+                            rec.stop();
+                            rec.reset();
+                            rec.release();
+                            recoderstarted = false;
+                            stopSelf();
+                            System.out.println("IRSHAD CALL_STATE_IDLE");
+                        } else {
+                            rec.stop();
+                            rec.reset();
+                            rec.release();
+                            recoderstarted = false;
+                            stopSelf();
+                            System.out.println("IRSHAD CALL_STATE_IDLE");
+                        }
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 else if(TelephonyManager.CALL_STATE_OFFHOOK==state){
+                    System.out.println("IRSHAD CALL_STATE_OFFHOOK");
                     try {
-                        rec.prepare();
+                    rec.prepare();
+                    rec.start();
+                    recoderstarted=true;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    rec.start();
-                    recoderstarted=true;
-
-
                 }
 
 
