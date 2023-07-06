@@ -45,7 +45,7 @@ public class RecordingService extends Service {
         rec.setAudioEncoder  (MediaRecorder.AudioEncoder.AMR_NB);
         rec.setAudioEncodingBitRate(18);
         rec.setAudioSamplingRate(44100);
-        rec.setOutputFile(file.getAbsoluteFile() + "/" + stringDate + "callrec.3gp");
+        rec.setOutputFile(file.getAbsoluteFile() + "/" + stringDate + "callrec.m4a");
         //rec.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         TelephonyManager manager = (TelephonyManager) getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
         manager.listen(new PhoneStateListener() {
