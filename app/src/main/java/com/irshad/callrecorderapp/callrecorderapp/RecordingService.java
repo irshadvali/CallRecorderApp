@@ -40,10 +40,13 @@ public class RecordingService extends Service {
         Date date = new Date();
         String stringDate = DateFormat.getDateTimeInstance().format(date);
         rec = new MediaRecorder();
-        rec.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
-        rec.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recoder.setAudioSource   (MediaRecorder.AudioSource.VOICE_CALL);
+        rec.setOutputFormat  (MediaRecorder.OutputFormat.MPEG_4);
+        rec.setAudioEncoder  (MediaRecorder.AudioEncoder.AMR_NB);
+        rec.setAudioEncodingBitRate(18);
+        rec.setAudioSamplingRate(44100);
         rec.setOutputFile(file.getAbsoluteFile() + "/" + stringDate + "callrec.3gp");
-        rec.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        //rec.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         TelephonyManager manager = (TelephonyManager) getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
         manager.listen(new PhoneStateListener() {
             @Override
